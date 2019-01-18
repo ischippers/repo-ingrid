@@ -1,0 +1,104 @@
+/* Ingrid Schippers, januari 2018
+ Java-programma # 01 (MyFirstApplication :)
+
+ Yathzee-spel, 13 worpen met 5 dobbelstenen
+ Output: aantal ogen van de dobbelstenen, totaal van de 5 stenen, evt. bijzondere combinaties
+ */
+public class Yathzee {
+    public static void main(String[] args) {
+        int i; int totaalAlleWorpen = 0 ;
+
+ class dice {
+            int roll ()  {return (int)(Math.random() * 6) + 1 ;
+ }
+        }
+
+        class Score {
+            boolean yahtzee = false, carre = false, threeOfKind = false, twoOfKind = false;
+
+ int score_roll (int val1, int val2, int val3, int val4, int val5){
+                int totaal = val1 + val2 + val3 + val4 + val5;
+ int j, aantalHulp, aantalOgen = 0;
+ int aantal1 = 0, aantal2 = 0 , aantal3 = 0, aantal4 = 0, aantal5 = 0, aantal6 = 0;
+
+ // bepaal aantal dobbelstenen met hetzelfde aantal ogen
+ for (j = 1; j <= 6; ++j) {
+
+                    aantalHulp = 0; // initialisatie
+
+ // hoog teller op als een dobbelsteen j ogen heeft
+ if (val1 == j) {aantalHulp++;}
+                    if (val2 == j) { aantalHulp++;}
+                    if (val3 == j) { aantalHulp++;}
+                    if (val4 == j) { aantalHulp++;}
+                    if (val5 == j) { aantalHulp++;}
+
+                    // bewaar uitkomst, aantal enen, tweeën, enz.
+
+ if (j == 1) { aantal1 = aantalHulp;}
+                    else if (j == 2) { aantal2 = aantalHulp;}
+                    else if (j == 3) { aantal3 = aantalHulp;}
+                    else if (j == 4) { aantal4 = aantalHulp;}
+                    else if (j == 5) { aantal5 = aantalHulp;}
+                    else if (j == 6) { aantal6 = aantalHulp;}
+
+                    // bijzondere combinaties?
+ if (aantalHulp == 5) {yahtzee = true ;}
+                    else if (aantalHulp == 4) {carre = true ; aantalOgen = j;}
+                    else if (aantalHulp == 3) {threeOfKind = true ; aantalOgen = j;}
+                    else if (aantalHulp == 2) {twoOfKind = true ;}
+
+                }  // einde for-loop;
+
+ // output: score
+ System.out.print(val1 + "," + val2  + "," +  val3  + "," +  val4  + "," +  val5 + " => totaal = " + totaal +  " ");
+
+ if (yahtzee)  {System.out.println("Yahtzee!" );}
+                else if (aantal2 ==1 & aantal3 == 1 & aantal4 == 1 & aantal5 == 1 ) {  // laatste dobbelsteen is dan een 1 of 6
+ System.out.println("Grote straat");
+ }
+                else if (    (aantal2 >= 1 & aantal3 >= 1 & aantal4 >= 1 & (aantal1 >= 1 | aantal5 >= 1))
+                        |    (aantal3 >= 1 & aantal4 >= 1 & aantal5 >= 1 & (aantal2 >= 1 | aantal6 >= 1))  )  {
+                    System.out.println("Kleine straat");
+ }
+                else if (threeOfKind & twoOfKind) {
+                    System.out.println("Full House");
+ }
+                else if (carre)  {
+                    System.out.println("Carre, 4 * " + aantalOgen);
+ }
+                else if (threeOfKind) {
+                    System.out.println("Thee of a Kind, 3 * " + aantalOgen);
+ }
+                else System.out.println("-"); // niks bijzonders ....
+
+ return totaal;
+ }
+
+        }  // einde class Score
+
+ // start van het programma
+
+ dice ds1 = new dice ();
+ dice ds2 = new dice ();
+ dice ds3 = new dice ();
+ dice ds4 = new dice ();
+ dice ds5 = new dice ();
+
+ // 13 worpen
+ for (i = 1; i <= 13; i++) {
+
+            if (i < 10) {System.out.print("worp 0" + i + ": ");}
+            else {System.out.print("worp " + i + ": ");}
+
+            /* bepaal score van de worp */
+ Score sc1 = new Score ();
+
+ totaalAlleWorpen = sc1.score_roll(ds1.roll(), ds2.roll(), ds3.roll(), ds4.roll(), ds5.roll()) + totaalAlleWorpen;
+
+ }
+        System.out.println("***");
+ System.out.println("totaal van " + --i + " worpen = " + totaalAlleWorpen);
+ System.out.println("***");
+ }
+}
