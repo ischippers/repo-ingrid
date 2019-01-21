@@ -1,0 +1,204 @@
+package nl.exampleCompany.carcase;
+
+import nl.exampleCompany.carcase.domain.Car;
+
+public class CarApp {
+    public static void main(String[] args) {
+        int  speed = 0, age = 0, yearOfRegistration = 1980;
+        System.out.println("Welcome to my very first car application! Yahoo!");
+        System.out.println("speed = " + speed ) ;
+
+        Car auto1 = new Car (132, 25000.00, "AA-BB-CC");
+
+        System.out.println(auto1);
+
+        Car auto2 = new Car ();
+
+        auto2.setSpeed(98);
+        auto2.setPrice(12000.00);
+        auto2.setLicencePlate( "JA-VA-08");
+        System.out.println(auto2);
+    }
+}
+
+
+==
+package nl.exampleCompany.carcase;
+
+import nl.exampleCompany.carcase.domain.Car;
+
+public class CarApp {
+    public static void main(String[] args) {
+        int  speed = 0, age = 0, yearOfRegistration = 1980;
+        System.out.println("Welcome to my very first car application! Yahoo!");
+        System.out.println("speed = " + speed ) ;
+
+        Car auto1 = new Car (132, 25000.00, "AA-BB-CC");
+
+        System.out.println(auto1);
+
+        Car auto2 = new Car ();
+
+        auto2.setSpeed(98);
+        auto2.setPrice(12000.00);
+        auto2.setLicencePlate( "JA-VA-08");
+        System.out.println(auto2);
+    }
+}
+
+
+==
+package nl.exampleCompany.carcase;
+
+import nl.exampleCompany.carcase.domain.Car;
+
+public class CarApp {
+    public static void main(String[] args) {
+        int  speed = 0, age = 0, yearOfRegistration = 1980;
+        System.out.println("Welcome to my very first car application! Yahoo!");
+        System.out.println("speed = " + speed ) ;
+
+        Car auto1 = new Car (132, 25000.00, "AA-BB-CC");
+
+        System.out.println(auto1);
+
+        Car auto2 = new Car ();
+
+        auto2.setSpeed(98);
+        auto2.setPrice(12000.00);
+        auto2.setLicencePlate( "JA-VA-08");
+        System.out.println(auto2);
+    }
+}
+
+==
+public class ArrayTest {
+    public static void main(String[] args) {
+        System.out.println("Array oefening");
+        int i, totaal = 0;
+
+
+
+        int worp[] = { (int) (Math.random() * 100), (int) (Math.random() * 100) , (int) (Math.random() * 100) };
+
+        // new  int [5];
+        //  for (i = 20; i < 23 ; i++)
+        //  worp [i] = i ;
+
+        for (i = 0; i < 3; i++) {
+            System.out.println("dit is nummer (" + i + " ) : " + worp[i]);
+            totaal = totaal + worp[i];
+        }
+        System.out.println("totaal = " + totaal);
+        System.out.println("===");
+
+        String str1 = "Hallo ";
+        String str2 = " devops1 ";
+        String str3 = " groep ";
+        String strTot = "De hele zin : ";
+
+        String strArr [] =  {str1, str2, str3};
+
+        for (i = 0; i < 3; i++) {
+            System.out.println("dit is nummer (" + i + " ) : " + strArr[i]);
+            strTot += strArr [i];
+        }
+        System.out.println(strTot);
+
+    }
+}
+
+==
+public class Priemtest {
+    public static void main(String[] args) {
+        int i = 1, x = 1, y = 1;
+        int mod = 0;
+        int teller = 1;
+        boolean priemgetal = false;
+        System.out.println("Dit programma test of een getal een priemgetal is");
+        for (i = 1; i <= 10; i++) {
+            switch (i) {
+                case 2:
+                case 3:
+                case 5:
+                case 7:
+                    System.out.println(i + " is een priemgetal!");
+                    break;
+                default:
+                    System.out.println(i + " niet");
+
+            }
+        }
+        System.out.println("Dit programma berekent de priemgetallen met de Zeef van Eratosthenes");
+        // zeef van Eratosthenes
+        for (x = 2; x <= 31; x++) {
+            // System.out.println(x);
+            priemgetal = true;
+            for (y = 2; y < x; y++) {
+                // System.out.println(y);
+                // bepaal of x deelbaar is door y (door een eerder getal)
+                mod = x%y;
+                // System.out.println("x = " + x + " y = "+ y + "mod = " + mod);
+                if (x%y == 0) {priemgetal = false;}
+            }
+            if (priemgetal) {
+                System.out.println(x + " is priemgetal");
+            }
+        }
+        System.out.println("Demo while loop");
+        while (teller < 7) {
+            System.out.println("teller = " + teller);
+            teller ++;
+        }
+
+
+    }
+}
+
+==
+
+public class Priemtest {
+    public static void main(String[] args) {
+        int i = 1, x = 1, y = 1;
+        int mod = 0;
+        int teller = 1;
+        boolean priemgetal = false;
+        System.out.println("Dit programma test of een getal een priemgetal is");
+        for (i = 1; i <= 10; i++) {
+            switch (i) {
+                case 2:
+                case 3:
+                case 5:
+                case 7:
+                    System.out.println(i + " is een priemgetal!");
+                    break;
+                default:
+                    System.out.println(i + " niet");
+
+            }
+        }
+        System.out.println("Dit programma berekent de priemgetallen met de Zeef van Eratosthenes");
+        // zeef van Eratosthenes
+        for (x = 2; x <= 31; x++) {
+            // System.out.println(x);
+            priemgetal = true;
+            for (y = 2; y < x; y++) {
+                // System.out.println(y);
+                // bepaal of x deelbaar is door y (door een eerder getal)
+                mod = x%y;
+                // System.out.println("x = " + x + " y = "+ y + "mod = " + mod);
+                if (x%y == 0) {priemgetal = false;}
+            }
+            if (priemgetal) {
+                System.out.println(x + " is priemgetal");
+            }
+        }
+        System.out.println("Demo while loop");
+        while (teller < 7) {
+            System.out.println("teller = " + teller);
+            teller ++;
+        }
+
+
+    }
+}
