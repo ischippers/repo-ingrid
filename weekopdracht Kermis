@@ -1,0 +1,162 @@
+package nl.kermisweb.weekopdracht2;
+
+public class Kermis {
+    public static void main(String[] args) {
+        System.out.println("Dit is de kermis");
+        int i, lab;
+        double omzetAttractie [] = new double [10];
+        double totaleOmzet = 0;
+
+        Kermisattractie att0;
+        att0 = new Kermisattractie(0, "Draaimolen ", 1.25, 25, 3, 22, 'C');
+        // System.out.println("?? " + att0.toString());
+
+        Kermisattractie att1;
+        att1 = new Kermisattractie(1, "Zweefmolen", 1.75, 13, 8, 16, 'C');
+
+        Kermisattractie att2;
+        att2 = new Kermisattractie(2, "Boksbal ", 1, 19, 1, 1,  4,'A');
+
+        Kermisattractie att3;
+        att3 = new Kermisattractie(3, "Botsauto ", 1.5, 5, 4, 10, 2,  'A');
+
+        Kermisattractie att4;
+        att4 = new Kermisattractie(4, "Grijpautomaat", 2, 8 , 3, 20, 8,  'A');
+
+        Kermisattractie att5;
+        att5 = new Kermisattractie(5, "Reuzenrad", 2.75, 30, 25, 144, 'C');
+
+        Kermisattractie att6;
+        att6 = new Kermisattractie(6, "Calypso", 2.25, 30, 6, 40, 'C');
+
+        Kermisattractie att7;
+        att7 = new Kermisattractie(7, "Schiettent ", 2.75, 30, 4, 4, 13,  'A');
+
+        Kermisattractie att8;
+        att8 = new Kermisattractie(8, "Ballenwerpen ", 1.40, 50, 3, 4, 7,  'A');
+
+        Kermisattractie att9;
+        att9 = new Kermisattractie(9, "Suikerspin ", 1.50, 50, 1, 1, 2,  'A');
+
+        omzetAttractie [att0.label] = att0.uitvoeren(1);
+        omzetAttractie [att1.label] = att1.uitvoeren(1);
+        omzetAttractie [att2.label] = att2.uitvoeren(1);
+        omzetAttractie [att3.label] = att3.uitvoeren(1);
+        omzetAttractie [att4.label] = att4.uitvoeren(1);
+        omzetAttractie [att5.label] = att5.uitvoeren(1);
+        omzetAttractie [att6.label] = att6.uitvoeren(1);
+        omzetAttractie [att7.label] = att7.uitvoeren(1);
+        omzetAttractie [att8.label] = att8.uitvoeren(1);
+        omzetAttractie [att9.label] = att9.uitvoeren(1);
+
+
+        for (i = 0 ; i <= att9.label ; i++ ){
+            totaleOmzet = totaleOmzet + omzetAttractie [i];
+            System.out.println("omzet attractie (" + i + ") = " + omzetAttractie [i] );
+        }
+        System.out.println("Totaalomzet  = " + totaleOmzet + "     ==>  BTW (9%) = " + (9*totaleOmzet)/100);
+
+
+    }
+}
+
+
+
+==
+
+package nl.kermisweb.weekopdracht2;
+
+public class Kermisattractie {
+    String  naam = " ";
+    double prijs;
+    private int rondes = 0, aantalMunten = 0;
+    int rondesVoorInspectie, ritduur, capaciteit, interval, label;
+    char type;  // C = vaste cyclus, variabele bezetting , A = ad hoc gebruik van de beschikbare capaciteit
+
+
+    // constructor voor attracties van het type 'V', met een Variabele bezetting
+    Kermisattractie (int label, String naam, double prijs, int rondesVoorInspectie, int ritduur , int capaciteit, char type) {
+        this.label = label;
+        this.naam  = naam;
+        this.prijs = prijs;
+        this.rondesVoorInspectie = rondesVoorInspectie;
+        this.ritduur = ritduur;
+        this.capaciteit = capaciteit;
+        this.type = type;
+    }
+    // overlaod constructor voor attracties van het type 'F', met een vaste bezetting
+    Kermisattractie (int label, String naam, double prijs, int rondesVoorInspectie, int ritduur , int capaciteit,int interval , char type) {
+        this.label = label;
+        this.naam  = naam;
+        this.prijs = prijs;
+        this.rondesVoorInspectie = rondesVoorInspectie;
+        this.ritduur = ritduur;
+        this.capaciteit = capaciteit;
+        this.interval = interval;
+        this.type = type;
+    }
+
+    public int getDuration() {
+        return ritduur;
+    }
+
+
+    // methode om de attractie het meegegeven aantal uren te laten draaien
+    public double uitvoeren (int uren) {
+        if  (type == 'C') {  // C = vaste cyclus met variabele bezetting
+            int rondes, muntjesRonde;
+            System.out.println(naam);
+            // aantal rondes per uur = 60 / ritduur
+            for (rondes = 1; rondes < (uren * 60) / ritduur; rondes++) {
+                int percentage = (int) (Math.random() * 40 + 50);  // willekeurig percentage tussen 50-90%
+                muntjesRonde = (int) ((percentage * capaciteit) / 100);
+                aantalMunten = aantalMunten + muntjesRonde;
+                System.out.println("ronde(" + rondes + ") bezetting "+ percentage + "%  muntjes " + muntjesRonde + " aantal muntjes " + aantalMunten);
+            }
+            rondes = rondes-1;
+            System.out.println("aantal rondes "+ rondes + "  totaal aantal munties "+ aantalMunten + " prijs = " + prijs + " omzet = " + aantalMunten * prijs);
+        }
+        else if (type == 'A') {  // A = ad hoc gebruik van de beschikbare apparaten
+            boolean goedgekeurd = true;
+            int apparaat;
+            for (apparaat = 1; apparaat <= capaciteit; apparaat++) {    //  loop door alle beschikbare apparaten (de capaciteit)
+                int totaalMinuten = 0;
+                rondes = 0;
+                while (totaalMinuten < uren * 60) {
+                    goedgekeurd = true;
+
+                    if ((int) (Math.random() * interval) == 1) {
+                         rondes = rondes + 1;
+                         // System.out.println(naam + " gestart op minuut = " + totaalMinuten + " aantal rondes " + rondes);
+                         totaalMinuten = totaalMinuten + ritduur;
+                        if (rondes % rondesVoorInspectie == 0 ) {
+
+                            goedgekeurd =  ( ((int) (Math.random() * 6 )) != 1);
+                            System.out.println("Inspectie  ronde " + rondes +  " goedgekeurd = " + goedgekeurd);
+                            if (goedgekeurd == false) {
+                                System.out.println("afgekeurde apparaat uit de roulatie genomen");
+                                totaalMinuten =  uren * 60;
+                            }
+                        }
+                    }
+                    else {
+                        totaalMinuten = totaalMinuten + 1;  // check over een minuut weer of het apparaat wordt gestart
+                    }
+                }
+                aantalMunten = aantalMunten + rondes;
+                System.out.println(naam + "("+ apparaat + ") aantal rondes "+ rondes);
+
+            }
+            System.out.println(naam + "totaal aantal munten = " + aantalMunten);
+            System.out.println("aantal rondes "+ rondes + "  totaal aantal munties "+ aantalMunten + " prijs = " + prijs + " omzet = " + aantalMunten * prijs);
+
+        }
+        return (aantalMunten * prijs);
+    }
+}
+
+
+
+
+-- 
+ 
