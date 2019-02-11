@@ -1,0 +1,23 @@
+/* for all body tags */
+body {
+    background-color: rgba(128, 0, 104, 1);
+}
+
+/* for all p(aragraph) tags */
+p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: yellow;
+}
+
+/* for all paragraph tags with class ok */
+p.ok {
+    color: green;
+    border-style: dotted dashed solid double;
+}
+
+/* for ONLY ONE paragraphich with id rocker */
+p#rocker {
+    color: rgba(0, 255, 132, 1);
+    font-family: Verdana, sans-serif;
+    text-align: center;
+}
