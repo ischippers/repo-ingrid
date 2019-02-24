@@ -1,0 +1,98 @@
+package nl.priemgetal.week4;
+
+public class Priemtest {
+    // int getal, minRange, MaxRange;
+
+    static boolean testGetal (int in) {
+        boolean priemgetal = true;
+        int i;
+        for (i = in-1; i >1 ; i--) {
+            if (in%i == 0 ) {
+                // System.out.println(in + " is geen priem, deelbaar door " + i );
+                priemgetal = false;
+            }
+            if (priemgetal == false) {
+                break;
+            }
+        }
+        return priemgetal;
+    }
+
+    static int [] testRange (int min, int max)     {
+        int i, n = 0;
+        int priemArray [] = new int [1000];
+
+        System.out.println("Priemgetallen in de range " + min + " t/m " + max + ":" );
+
+        for (i = min; (i <= max & n < 999); i++) {
+            if (testGetal(i)) {
+                priemArray [n] = i;
+                n++;
+                if (n > 999) {
+                    System.out.println("Teveel priemgetallen, kies een kleinere range!");
+                }
+            }
+        }
+        return  priemArray;
+    }
+}
+
+
+
+package nl.priemgetal.week4;
+
+import java.util.Scanner;
+
+public class MainPriem {
+    public static void main(String[] args)
+        throws java.io.IOException {
+        boolean resultaat = false;
+        int getalIn = 0 , minIn = 0 , maxIn = 0 , t;
+        int priemgetallen [];
+
+        System.out.println("---");
+        System.out.print("Voer een getal in gevolgd door ENTER, dan zoek ik uit of dit een priemgetal is :  ");
+        Scanner invoer = new Scanner(System.in);
+        if (invoer.hasNext()) getalIn = invoer.nextInt();
+
+        System.out.println("---");
+
+        while (!resultaat) {
+
+            resultaat = Priemtest.testGetal(getalIn)  ;
+
+            if (resultaat ) {
+                System.out.println(getalIn + " is een priemgetal!!");
+            }
+            else {
+                System.out.print(getalIn + " is geen priemgetal, we gaan het nog een keer proberen :   ");
+                // Scanner invoer = new Scanner(System.in);
+                if (invoer.hasNext()) getalIn = invoer.nextInt();
+            }
+
+        }
+
+        System.out.println("---");
+
+        System.out.println("---");
+
+
+        System.out.println("Voer een range in, dan bepaal ik de priemgetallen!");
+        System.out.print("Ondergrens ");
+
+        if (invoer.hasNext()) minIn = invoer.nextInt();
+        System.out.print("Bovengrens ");
+        if (invoer.hasNext()) maxIn = invoer.nextInt();
+
+
+        priemgetallen = Priemtest.testRange(minIn, maxIn);
+        System.out.println("---");
+
+        for (t = 0 ; t < priemgetallen.length ; t++ ){
+            if (priemgetallen[t] > 0 ) {
+                System.out.println(t + " : " + priemgetallen[t]);
+            }
+        }
+
+    }
+}
