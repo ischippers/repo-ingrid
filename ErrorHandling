@@ -1,0 +1,52 @@
+public Todo create(@RequestBody Todo todo) {
+return todoService.save(todo);
+}
+
+ResponseEntity<?> create(@RequestBody Todo todo) throws Exception {
+if (todo.getId() == 0 && todo.getTask() != null )
+return new ResponseEntity<Todo>(todoService.save(todo), HttpStatus.OK);
+else
+return new ResponseEntity<String>("foutje", HttpStatus.BAD_REQUEST);
+}
+
+
+Todo save(@RequestBody Todo todo) throws Exception {
+if (todo.getId() == 0 && todo.getTask() != null )
+return todoService.save(todo);
+else
+throw new Exception("todo is empty");
+}
+@ExceptionHandler(Exception.class)
+public ResponseEntity<String> exceptionHandler(Exception ex) {
+return new ResponseEntity<>("exception: " + ex.getMessage(),
+HttpStatus.BAD_REQUEST);
+}
+
+
+ @GetMapping("/todo/{id}")
+  public Optional<Todo> todoById(@PathVariable  int id) {
+    return todoService.findById(id);
+  }
+  
+  @GetMapping("/todo/{id}")
+  ResponseEntity<?> todoById(@PathVariable  int id) throws Exception {
+    if (todoService.findById(id).isPresent()) {
+      return new ResponseEntity<Todo>(todoService.findById(id).get(), HttpStatus.OK);
+    }
+    else
+      return new ResponseEntity<String>("foutje", HttpStatus.BAD_REQUEST);
+  }
+
+  @GetMapping("/todo/{id}")
+  Todo findById(@PathVariable int id) throws Exception {
+    if (todoService.findById(id).isPresent()) {
+      return todoService.findById(id).get();
+    }
+    else
+      throw new Exception("todo is not found!!");
+  }
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<String> exceptionHandler(Exception ex) {
+    return new ResponseEntity<>("exception: " + ex.getMessage(),
+            HttpStatus.BAD_REQUEST);
+  }
